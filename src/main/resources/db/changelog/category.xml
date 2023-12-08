@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd">
+
+    <changeSet id="20231208-1" author="yigit">
+    <createTable tableName="product">
+        <column name="id" type="bigint" autoIncrement="true" startWith="1">
+            <constraints primaryKey="true" nullable="false"/>
+        </column>
+        <column name="category_id" type="bigint">
+            <constraints unique="true" nullable="false"/>
+        </column>
+        <column name="name" type="varchar(255)">
+            <constraints unique="true" nullable="false"/>
+        </column>
+        <column name="price" type="bigint">
+            <constraints nullable="false"/>
+        </column>
+        <column name="explanation" type="varchar(255)">
+            <constraints nullable="false"/>
+        </column>
+    </createTable>
+
+
+    </changeSet>
+
+
+
+    <changeSet id="20231208-2" author="yigit">
+
+        <createTable tableName="category">
+            <column name="id" type="bigint" autoIncrement="true" startWith="1">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="varchar(255)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet  author="yigit"  id="20231208-3">
+        <addForeignKeyConstraint  baseColumnNames="category_id"
+                                  baseTableName="product"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_category_id"
+                                  referencedColumnNames="id"
+                                  referencedTableName="category"
+                                  referencedTableSchemaName="public"
+                                  validate="true"/>
+    </changeSet>
+
+
+
+</databaseChangeLog>
