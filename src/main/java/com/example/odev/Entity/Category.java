@@ -17,8 +17,10 @@ import java.util.List;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-    private String Name;
+    @Column(name = "name")
+    private String name;
     @OneToMany(mappedBy = "category")
     @JsonManagedReference
     private List<Product> product;

@@ -14,12 +14,16 @@ import lombok.NoArgsConstructor;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+    @Column(name = "email")
     private String email;
+    @Column(name = "username")
     private String username;
+    @Column(name = "password")
     private String password;
     @ManyToOne
-   @JoinColumn(name = "role_id",referencedColumnName = "id")
+    @JoinColumn(name = "role_id",referencedColumnName = "id")
     @JsonManagedReference
     private Role role;
 }
