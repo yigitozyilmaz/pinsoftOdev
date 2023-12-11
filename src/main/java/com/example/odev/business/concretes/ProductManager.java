@@ -7,6 +7,7 @@ import com.example.odev.business.responses.GetAllProducts;
 import com.example.odev.business.responses.GetProductsDetails;
 import com.example.odev.mappers.ModelMapperService;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+@NoArgsConstructor
 public class ProductManager implements ProductService {
 
     private ProductRepository productRepository;

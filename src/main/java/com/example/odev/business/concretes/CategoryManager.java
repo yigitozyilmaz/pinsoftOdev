@@ -6,6 +6,7 @@ import com.example.odev.business.abstracts.CategoryService;
 import com.example.odev.business.responses.GetAllCategories;
 import com.example.odev.mappers.ModelMapperService;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+@NoArgsConstructor
 public class CategoryManager implements CategoryService {
 
     private CategoryRepository categoryRepository;
