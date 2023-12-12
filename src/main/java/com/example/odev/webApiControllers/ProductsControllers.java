@@ -5,6 +5,7 @@ import com.example.odev.business.responses.GetAllProducts;
 import com.example.odev.business.responses.GetProductsDetails;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ProductsControllers {
 
+    @Autowired
     private ProductService productService;
 
     @GetMapping("/getAll")
@@ -25,8 +27,8 @@ public class ProductsControllers {
     }
 
     @GetMapping("/getProductDetails")
-    public GetProductsDetails getProductsDetails() {
-        return productService.getProductsDetails();
+    public List<GetProductsDetails> findAll() {
+        return productService.findAll();
     }
 
 

@@ -8,6 +8,7 @@ import com.example.odev.business.responses.GetProductsDetails;
 import com.example.odev.mappers.ModelMapperService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +19,9 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class ProductManager implements ProductService {
 
+    @Autowired
     private ProductRepository productRepository;
+    @Autowired
     private ModelMapperService modelMapperService;
 
     @Override
@@ -31,10 +34,11 @@ public class ProductManager implements ProductService {
     }
 
     @Override
-    public GetProductsDetails getProductsDetails() {
-        Product product = (Product) this.productRepository.findAll();
-        GetProductsDetails getProductsDetails = this.modelMapperService.forResponse()
-                .map(product, GetProductsDetails.class);
+    public List<GetProductsDetails> findAll() {
+        List<Product> products = productRepository.findAll();
+        List<GetProductsDetails> getProductsDetails = products.stream()
+                .map(product -> this.modelMapperService.forResponse()
+                        .map(product, GetProductsDetails.class)).collect(Collectors.toList());
         return getProductsDetails;
     }
 }

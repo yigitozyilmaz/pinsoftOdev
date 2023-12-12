@@ -7,6 +7,7 @@ import com.example.odev.business.responses.GetAllCategories;
 import com.example.odev.mappers.ModelMapperService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +18,10 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class CategoryManager implements CategoryService {
 
+    @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
     private ModelMapperService modelMapperService;
 
 

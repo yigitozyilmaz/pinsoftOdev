@@ -8,5 +8,5 @@ import java.util.List;
 public interface ProductService {
     List<GetAllProducts> getAll();
 
-    GetProductsDetails getProductsDetails();
+    List<GetProductsDetails> findAll();
 }
