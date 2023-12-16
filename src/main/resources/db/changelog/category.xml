@@ -9,11 +9,13 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="category_id" type="bigint">
-                <constraints unique="true" nullable="false"/>
+                <constraints nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
                 <constraints unique="true" nullable="false"/>
             </column>
+            <column name="address"
+                    type="varchar(255)"/>
             <column name="price" type="Double">
                 <constraints nullable="false"/>
             </column>
@@ -47,6 +49,9 @@
                                   referencedTableSchemaName="public"
                                   validate="true"/>
     </changeSet>
+
+
+
 
     <changeSet id="20231210_1" author="atapolat">
         <insert tableName="category">
