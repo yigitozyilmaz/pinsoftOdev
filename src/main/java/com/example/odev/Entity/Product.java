@@ -20,6 +20,8 @@ public class Product {
     private String name;
     @Column(name = "price")
     private Double price;
+    @Column(name="address")
+    private String address;
     @Column(name = "explanation")
     private String explanation;
     @ManyToOne

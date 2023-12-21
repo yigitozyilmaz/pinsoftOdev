@@ -1,16 +1,25 @@
 package com.example.odev.business.concretes;
 
+import com.example.odev.Entity.Category;
 import com.example.odev.Entity.Product;
+import com.example.odev.Repository.CategoryRepository;
 import com.example.odev.Repository.ProductRepository;
 import com.example.odev.business.abstracts.ProductService;
 import com.example.odev.business.responses.GetAllProducts;
 import com.example.odev.business.responses.GetProductsDetails;
 import com.example.odev.mappers.ModelMapperService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +30,37 @@ public class ProductManager implements ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    public void saveProductToDB(MultipartFile address, String name, String explanation, Double price, Long category_id) {
+        Product p = new Product();
+     String fileName = address != null ? StringUtils.cleanPath(address.getOriginalFilename()) : null;
+
+        try {
+            if (address != null) {
+                p.setAddress(Base64.getEncoder().encodeToString(address.getBytes()));
+            } else {
+                // Adres null ise özel bir değer veya boş bir değer atayabilirsiniz.
+                p.setAddress(""); // Veya null değeri kabul edilebilirse: p.setAddress(null);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        p.setExplanation(explanation);
+
+        Category category = categoryRepository.findById(category_id)
+                .orElseThrow(() -> new EntityNotFoundException());
+
+        p.setCategory(category);
+        p.setName(name);
+        p.setPrice(price);
+        productRepository.save(p);
+    }
+
+
     @Autowired
     private ModelMapperService modelMapperService;
 
