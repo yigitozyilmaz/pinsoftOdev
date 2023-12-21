@@ -1,4 +1,5 @@
 package com.example.odev.config;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -13,7 +14,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000","herhangi bir vercel veya netlify linki varsa buraya yapıştır")
+                        .allowedOrigins("http://:local3000host", "herhangi bir vercel veya netlify linki varsa buraya yapıştır")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*");
             }

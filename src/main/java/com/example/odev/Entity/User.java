@@ -26,4 +26,9 @@ public class User {
     @JoinColumn(name = "role_id",referencedColumnName = "id")
     @JsonManagedReference
     private Role role;
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 }
