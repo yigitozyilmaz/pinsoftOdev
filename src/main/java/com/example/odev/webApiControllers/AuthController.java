@@ -1,10 +1,12 @@
 package com.example.odev.webApiControllers;
 
 import com.example.odev.Entity.User;
+import com.example.odev.business.abstracts.UserService;
 import com.example.odev.business.auth.JwtUtil;
 import com.example.odev.business.requests.LoginRequest;
 import com.example.odev.business.responses.ErrorResponse;
 import com.example.odev.business.responses.LoginResponse;
+import com.example.odev.business.responses.UserRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,10 +16,8 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/api/auth")
@@ -48,4 +48,5 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
     }
+
 }
