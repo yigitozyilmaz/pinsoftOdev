@@ -14,7 +14,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://:local3000host", "herhangi bir vercel veya netlify linki varsa buraya yapıştır")
+                        .allowedOrigins("http://:localhost3000", "herhangi bir vercel veya netlify linki varsa buraya yapıştır")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*");
             }
