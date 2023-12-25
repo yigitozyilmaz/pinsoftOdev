@@ -1,7 +1,10 @@
 package com.example.odev.webApiControllers;
 
+import com.example.odev.Entity.Category;
+import com.example.odev.Entity.Product;
 import com.example.odev.business.abstracts.ProductService;
 import com.example.odev.business.abstracts.UserService;
+import com.example.odev.business.concretes.ProductManager;
 import com.example.odev.business.responses.GetAllProducts;
 import com.example.odev.business.responses.GetProductsDetails;
 import com.example.odev.business.responses.ProductRequest;
@@ -9,6 +12,8 @@ import com.example.odev.business.responses.UserRequest;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,6 +29,11 @@ public class ProductsControllers {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private ProductManager productManager;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/getAll")
     public List<GetAllProducts> getAll() {
@@ -43,8 +53,6 @@ public class ProductsControllers {
         return "redirect:/listProduct.html";
     }
 
-@Autowired
-    private UserService userService;
     @PostMapping("/register")
     public String showRegistrationForm(@RequestBody UserRequest request){
         // create model object to store form data
@@ -52,4 +60,9 @@ public class ProductsControllers {
         return "basarili" ;
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<GetProductsDetails>> searchProducts(@RequestParam String name) {
+        List<GetProductsDetails> searchResults = productManager.searchProducts(name);
+        return new ResponseEntity<>(searchResults, HttpStatus.OK);
+    }
 }

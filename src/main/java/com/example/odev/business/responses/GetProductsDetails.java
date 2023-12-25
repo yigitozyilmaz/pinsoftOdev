@@ -13,4 +13,5 @@ public class GetProductsDetails {
     private String name;
     private Double price;
     private String explanation;
+    private String categoryName;
 }
