@@ -1,6 +1,8 @@
 package com.example.odev.webApiControllers;
 
+import com.example.odev.Entity.Role;
 import com.example.odev.Entity.User;
+import com.example.odev.Repository.UserRepository;
 import com.example.odev.business.abstracts.UserService;
 import com.example.odev.business.auth.JwtUtil;
 import com.example.odev.business.requests.LoginRequest;
@@ -26,6 +28,10 @@ public class AuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private UserRepository userRepository;
+
     @Autowired
     private JwtUtil jwtUtil;
 
@@ -35,9 +41,9 @@ public class AuthController {
         try {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
             String username = authentication.getName();
-            User user = new User(username, " ");
+            User user = userRepository.findUserByUsername(username);
             String token = jwtUtil.createToken(user);
-            LoginResponse loginResponse = new LoginResponse(username, token);
+            LoginResponse loginResponse = new LoginResponse(username, token, user.getEmail(),user.getRole().getId());
 
             return ResponseEntity.ok(loginResponse);
         } catch (BadCredentialsException badCredentialsException) {
