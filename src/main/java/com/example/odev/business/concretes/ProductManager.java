@@ -90,4 +90,14 @@ public class ProductManager implements ProductService {
         return matchingProducts;
     }
 
+    public List<GetProductsDetails> searchById(long id) {
+        List<Product> products = productRepository.findAll();
+        List<GetProductsDetails> matchingProducts = products.stream()
+                .filter(product -> Long.compare(product.getId(), id) == 0)
+                .map(product -> modelMapperService.forResponse().map(product, GetProductsDetails.class))
+                .collect(Collectors.toList());
+
+        return matchingProducts;
+    }
+
 }

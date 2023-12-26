@@ -65,4 +65,10 @@ public class ProductsControllers {
         List<GetProductsDetails> searchResults = productManager.searchProducts(name);
         return new ResponseEntity<>(searchResults, HttpStatus.OK);
     }
+
+    @GetMapping("/searchById")
+    public ResponseEntity<List<GetProductsDetails>> searchById (@RequestParam long id) {
+        List<GetProductsDetails> searchResults = productManager.searchById(id);
+        return new ResponseEntity<>(searchResults, HttpStatus.OK);
+    }
 }
