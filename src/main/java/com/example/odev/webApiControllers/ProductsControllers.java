@@ -5,10 +5,7 @@ import com.example.odev.Entity.Product;
 import com.example.odev.business.abstracts.ProductService;
 import com.example.odev.business.abstracts.UserService;
 import com.example.odev.business.concretes.ProductManager;
-import com.example.odev.business.responses.GetAllProducts;
-import com.example.odev.business.responses.GetProductsDetails;
-import com.example.odev.business.responses.ProductRequest;
-import com.example.odev.business.responses.UserRequest;
+import com.example.odev.business.responses.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +48,18 @@ public class ProductsControllers {
     public String saveProduct(@RequestBody ProductRequest request) {
         productService.saveProductToDB(request.getAddress(), request.getName(), request.getExplanation(), request.getPrice(), request.getCategory_id());
         return "redirect:/listProduct.html";
+    }
+
+    @PostMapping("/update")
+    public void updateProduct(@RequestBody ProductUpdateReq request){
+productService.updateProduct(request.getId(),request.getAddress(), request.getName(), request.getExplanation(), request.getPrice(), request.getCategory_id());
+    }
+
+
+    @PostMapping("/delete")
+    public void deleteProduct(@RequestBody long id){
+        productService.deleteProduct(id);
+
     }
 
     @PostMapping("/register")

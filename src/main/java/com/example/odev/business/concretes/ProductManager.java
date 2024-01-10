@@ -100,4 +100,34 @@ public class ProductManager implements ProductService {
         return matchingProducts;
     }
 
+    public void updateProduct(Long id, MultipartFile address, String name, String explanation, Double price, Long category_id) {
+        Product existingProduct = productRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Product not found"));
+
+        // Update fields
+        existingProduct.setName(name);
+        existingProduct.setExplanation(explanation);
+        existingProduct.setPrice(price);
+
+        // Update address if provided
+
+
+        // Update category if provided
+        if (category_id != null) {
+            Category category = categoryRepository.findById(category_id)
+                    .orElseThrow(() -> new EntityNotFoundException("Category not found"));
+            existingProduct.setCategory(category);
+        }
+
+        // Save the updated product
+        productRepository.save(existingProduct);
+    }
+
+    public void deleteProduct(Long id) {
+        Product existingProduct = productRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Product not found"));
+
+        // Delete the product
+        productRepository.delete(existingProduct);
+    }
 }

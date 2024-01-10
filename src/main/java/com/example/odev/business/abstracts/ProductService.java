@@ -16,5 +16,6 @@ public interface ProductService {
 
     void saveProductToDB(MultipartFile address, String name, String explanation, Double price, Long category_id) ;
 
-
+    void updateProduct(Long id, MultipartFile address, String name, String explanation, Double price, Long category_id) ;
+    void deleteProduct(Long id);
 }
